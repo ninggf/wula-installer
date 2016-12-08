@@ -28,7 +28,7 @@ class WulaInstaller extends LibraryInstaller {
 		$type      = substr($type, 5) . 's-dir';
 		if (isset($extraPath[ $type ])) {
 			if ($type == 'extension') {
-				$path .= $extraPath[ $type ] . '/';
+				$path = $extraPath[ $type ] . '/';
 			} else {
 				$path .= '/' . $extraPath[ $type ] . '/';
 			}
