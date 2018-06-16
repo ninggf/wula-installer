@@ -10,10 +10,16 @@ use Composer\Package\PackageInterface;
  *
  * @package wula\Composer
  * @author  Leo Ning <windywany@gmail.com>
+ * @version 2.0.0
  * @since   1.0.0
  */
 class WulaInstaller extends LibraryInstaller {
-	const SUPPORT_TYPES = ['wula-module', 'wula-asset', 'wula-extension', 'wula-theme'];
+	const SUPPORT_TYPES = [
+		'wula-module',
+		'wula-asset',
+		'wula-extension',
+		'wula-theme'
+	];
 
 	public function supports($packageType) {
 		return in_array($packageType, self::SUPPORT_TYPES);
@@ -26,17 +32,18 @@ class WulaInstaller extends LibraryInstaller {
 		$extraPath = isset($extraPath['wula']) ? $extraPath['wula'] : [];
 		$path      = isset($extraPath['wwwroot']) ? $extraPath['wwwroot'] : 'wwwroot';
 		$type      = substr($type, 5) . 's-dir';
+
 		if (isset($extraPath[ $type ])) {
-			if ($type == 'extension') {
+			if ($type == 'extensions-dir' || $type == 'modules-dir') {
 				$path = $extraPath[ $type ] . '/';
 			} else {
 				$path .= '/' . $extraPath[ $type ] . '/';
 			}
-		} elseif ($type == 'modules-dir') {
-			$path .= '/modules/';
+		} else if ($type == 'modules-dir') {
+			$path = 'modules/';
 		} else if ($type == 'themes-dir') {
 			$path .= '/themes/';
-		} elseif ($type == 'assets-dir') {
+		} else if ($type == 'assets-dir') {
 			$path .= '/assets/';
 		} else if ($type == 'extensions-dir') {
 			$path = 'extensions/';
