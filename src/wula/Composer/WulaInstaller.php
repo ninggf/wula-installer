@@ -56,7 +56,7 @@ class WulaInstaller extends LibraryInstaller {
 		$pname           = array_pop($pname);
 		$assetDir        = isset($myExtra['assetDir']) && $myExtra['assetDir'] ? $myExtra['assetDir'] : $pname;
 		$this->assetsDir .= $assetDir;
-		if ($type == 'extensions-dir' || $type == 'assets-dir') {
+		if ($type == 'extensions-dir') {
 			return $path . $package->getPrettyName();
 		} else {
 			return $path . $pname;
