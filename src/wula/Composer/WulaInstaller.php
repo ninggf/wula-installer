@@ -37,7 +37,7 @@ class WulaInstaller extends LibraryInstaller {
 		$type            = substr($type, 5) . 's-dir';
 		$this->assetsDir = $path . '/assets/';
 		if (isset($extraPath[ $type ])) {
-			if ($type == 'extensions-dir' || $type == 'modules-dir') {
+			if ($type == 'extensions-dir' || $type == 'modules-dir' || $type == 'themes-dir') {
 				$path = $extraPath[ $type ] . '/';
 			} else {
 				$path .= '/' . $extraPath[ $type ] . '/';
@@ -45,7 +45,7 @@ class WulaInstaller extends LibraryInstaller {
 		} else if ($type == 'modules-dir') {
 			$path = 'modules/';
 		} else if ($type == 'themes-dir') {
-			$path .= '/themes/';
+			$path = 'themes/';
 		} else if ($type == 'assets-dir') {
 			$path .= '/assets/';
 		} else if ($type == 'extensions-dir') {
@@ -56,7 +56,7 @@ class WulaInstaller extends LibraryInstaller {
 		$pname           = array_pop($pname);
 		$assetDir        = isset($myExtra['assetDir']) && $myExtra['assetDir'] ? $myExtra['assetDir'] : $pname;
 		$this->assetsDir .= $assetDir;
-		if ($type == 'extensions-dir' || $type == 'assets-dir') {
+		if ($type == 'extensions-dir') {
 			return $path . $package->getPrettyName();
 		} else {
 			return $path . $pname;
@@ -76,7 +76,7 @@ class WulaInstaller extends LibraryInstaller {
 	public function uninstall(InstalledRepositoryInterface $repo, PackageInterface $package) {
 		parent::uninstall($repo, $package);
 		$type = $package->getType();
-		if ($type == 'wula-module' || $type == 'wula-extension') {
+		if ($type != 'wula-asset') {
 			$dpath = $this->assetsDir;
 			if (is_dir($dpath)) {
 				$this->filesystem->removeDirectoryPhp($dpath);
@@ -86,7 +86,7 @@ class WulaInstaller extends LibraryInstaller {
 
 	private function installAssets(PackageInterface $package) {
 		$type = $package->getType();
-		if ($type == 'wula-module' || $type == 'wula-extension') {
+		if ($type != 'wula-asset') {
 			$path      = $this->getInstallPath($package);
 			$assetsDir = $path . '/assets/';
 			if (is_dir($assetsDir) && file_exists($assetsDir)) {
