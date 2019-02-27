@@ -29,12 +29,10 @@ class WulaInstaller extends LibraryInstaller {
     public function getInstallPath(PackageInterface $package) {
         $parent          = $this->composer->getPackage();
         $type            = $package->getType();
-        $myExtra         = $package->getExtra();
         $extraPath       = $parent->getExtra();
         $extraPath       = isset($extraPath['wula']) ? $extraPath['wula'] : [];
         $path            = isset($extraPath['wwwroot']) ? $extraPath['wwwroot'] : 'wwwroot';
         $type            = substr($type, 5) . 's-dir';
-        $this->assetsDir = $path . '/assets/';
         if (isset($extraPath[ $type ])) {
             if ($type == 'extensions-dir' || $type == 'modules-dir' || $type == 'themes-dir') {
                 $path = $extraPath[ $type ] . '/';
