@@ -27,12 +27,15 @@ class WulaInstaller extends LibraryInstaller {
     }
 
     public function getInstallPath(PackageInterface $package) {
-        $parent          = $this->composer->getPackage();
-        $type            = $package->getType();
-        $extraPath       = $parent->getExtra();
-        $extraPath       = isset($extraPath['wula']) ? $extraPath['wula'] : [];
-        $path            = isset($extraPath['wwwroot']) ? $extraPath['wwwroot'] : 'wwwroot';
-        $type            = substr($type, 5) . 's-dir';
+        $parent    = $this->composer->getPackage();
+        $type      = $package->getType();
+        $extraPath = $parent->getExtra();
+        $extraPath = isset($extraPath['wula']) ? $extraPath['wula'] : [];
+        $path      = isset($extraPath['wwwroot']) ? $extraPath['wwwroot'] : 'wwwroot';
+        $type      = substr($type, 5) . 's-dir';
+        $pname     = explode('/', $package->getPrettyName());
+        $pname     = array_pop($pname);
+
         if (isset($extraPath[ $type ])) {
             if ($type == 'extensions-dir' || $type == 'modules-dir' || $type == 'themes-dir') {
                 $path = $extraPath[ $type ] . '/';
@@ -40,7 +43,8 @@ class WulaInstaller extends LibraryInstaller {
                 $path .= '/' . $extraPath[ $type ] . '/';
             }
         } else if ($type == 'modules-dir') {
-            $path = 'modules/';
+            $path  = 'modules/';
+            $pname = str_replace('.', '/', $pname);//支持子模块
         } else if ($type == 'themes-dir') {
             $path = 'themes/';
         } else if ($type == 'assets-dir') {
@@ -48,9 +52,6 @@ class WulaInstaller extends LibraryInstaller {
         } else if ($type == 'extensions-dir') {
             $path = 'extensions/';
         }
-
-        $pname = explode('/', $package->getPrettyName());
-        $pname = array_pop($pname);
 
         if ($type == 'extensions-dir') {
             return $path . $package->getPrettyName();
