@@ -1,24 +1,24 @@
 {
-  "name": "wula/wula-installer",
-  "description": "wulaphp的Composer插件，用于安装wulaphp的模块，扩展，主题，资源等.",
-  "type": "composer-plugin",
-  "license": "MIT",
-  "autoload": {
-	"psr-0": {
-	  "wula\\Composer\\": "src/"
-	}
-  },
-  "authors": [
-	{
-	  "name": "Leo Ning",
-	  "email": "windywany@gmail.com"
-	}
-  ],
-  "extra": {
-	"class": "wula\\Composer\\WulaComposerPlugin"
-  },
-  "require": {
-	"php": ">=5.6 || >= 7.0",
-	"composer-plugin-api": "^1.0"
-  }
+    "name": "wula/wula-installer",
+    "description": "wulaphp的Composer插件，用于安装wulaphp的模块，扩展，主题，资源等.",
+    "type": "composer-plugin",
+    "license": "MIT",
+    "autoload": {
+        "psr-0": {
+            "wula\\Composer\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Leo Ning",
+            "email": "windywany@gmail.com"
+        }
+    ],
+    "extra": {
+        "class": "wula\\Composer\\WulaComposerPlugin"
+    },
+    "require": {
+        "php": ">= 7.1",
+        "composer-plugin-api": "^2.0"
+    }
 }
