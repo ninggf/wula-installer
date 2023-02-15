@@ -18,7 +18,7 @@
         "class": "wula\\Composer\\WulaComposerPlugin"
     },
     "require": {
-        "php": ">= 7.1",
-        "composer-plugin-api": "^2.0"
+        "php": ">= 7.2",
+        "composer-plugin-api": "^2.3"
     }
 }
